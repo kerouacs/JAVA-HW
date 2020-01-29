@@ -202,10 +202,11 @@ public class Worksheet2 implements Worksheet2Interface {
 		return Math.abs(left - right) <= 1 && isHeightBalanced(a.getLeft()) && isHeightBalanced(a.getRight());
 
 	}
+
 	/**
 	 * method to get depth.
 	 * 
-	 * @param a Given a tree of integers.
+	 * @param a    Given a tree of integers.
 	 * @param root depth
 	 * @return tree depth.
 	 */
@@ -232,6 +233,7 @@ public class Worksheet2 implements Worksheet2Interface {
 		return new Tree<Integer>(a.getLeft().getValue(), a.getLeft().getLeft(),
 				new Tree<Integer>(a.getValue(), a.getLeft().getRight(), a.getRight()));
 	}
+
 	/**
 	 * method to RR rotation
 	 * 
@@ -245,6 +247,7 @@ public class Worksheet2 implements Worksheet2Interface {
 		return new Tree<Integer>(a.getRight().getValue(),
 				new Tree<Integer>(a.getValue(), a.getLeft(), a.getRight().getLeft()), a.getRight().getRight());
 	}
+
 	/**
 	 * method to RL rotation
 	 * 
@@ -259,6 +262,7 @@ public class Worksheet2 implements Worksheet2Interface {
 				new Tree<Integer>(a.getValue(), a.getLeft(), a.getRight().getLeft().getLeft()),
 				new Tree<Integer>(a.getRight().getValue(), a.getRight().getLeft().getRight(), a.getRight().getRight()));
 	}
+
 	/**
 	 * method to LR rotation
 	 * 
@@ -273,6 +277,7 @@ public class Worksheet2 implements Worksheet2Interface {
 				new Tree<Integer>(a.getLeft().getValue(), a.getLeft().getLeft(), a.getLeft().getRight().getLeft()),
 				new Tree<Integer>(a.getValue(), a.getLeft().getRight().getRight(), a.getRight()));
 	}
+
 	/**
 	 * method to balance tree
 	 * 
@@ -299,6 +304,7 @@ public class Worksheet2 implements Worksheet2Interface {
 		} else
 			return a;
 	}
+
 	/**
 	 * method to insert x to balanced tree
 	 * 
@@ -317,6 +323,7 @@ public class Worksheet2 implements Worksheet2Interface {
 		}
 
 	}
+
 	/**
 	 * method to delete x to balanced tree
 	 * 
