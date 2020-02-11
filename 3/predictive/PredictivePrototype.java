@@ -1,7 +1,7 @@
 package predictive;
 
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
@@ -51,29 +51,48 @@ public class PredictivePrototype {
 	}
 
 	public static Set<String> signatureToWords(String signature) throws IOException {
-		HashSet<String> match = new HashSet<String>();
-		Scanner scan = null;
-		try {
-		    File file = new File("/usr/share/dict/words");
-		    scan = new Scanner(new FileReader(file));
-		    String line = null;
-		    while (scan.hasNextLine()) {		    	
-		    	if(line.length()==signature.length() && isValidWord(line)){
-		    		if(wordToSignature(line).equals(signature)){
-		    			line = line.toLowerCase();
-		    			if(!(match.contains(line)))
-		    				match.add(line);
-		    		}
-		    	}
-		    }
+//		HashSet<String> match = new HashSet<String>();
+//		Scanner scan = null;
+//		try {
+//		    File file = new File("/Users/DELL/Desktop/words");
+//		    scan = new Scanner(new FileReader(file));
+//		    String line = null;
+//		    while (scan.hasNextLine()) {		    	
+//		    	if(line.length()==signature.length() && isValidWord(line)){
+//		    		if(wordToSignature(line).equals(signature)){
+//		    			line = line.toLowerCase();
+//		    			if(!(match.contains(line)))
+//		    				match.add(line);
+//		    		}
+//		    	}
+//		    }
+//
+//		} catch (IOException e) {
+//		    System.out.println("Words file not found.");
+//		} finally {
+//		    scan.close();
+//		}
+//		return match;		
+//	}
+        Set<String> res = new HashSet<String>();
+        try {
+            Scanner sc = new Scanner(new File("usr/share/dict/words"));
+            while (sc.hasNext()) {
+                String line = sc.nextLine().toLowerCase();
 
-		} catch (IOException e) {
-		    System.out.println("Words file not found.");
-		} finally {
-		    scan.close();
-		}
-		return match;		
-	}
+                if (line.length() == signature.length()
+                        && isValidWord(line)
+                        && signature.equals(wordToSignature(line))) {
+                    res.add(line);
+                }
+            }
+            sc.close();
+        } catch (FileNotFoundException e) {
+
+            e.printStackTrace();
+        }
+        return res;
+}
 	
 	protected static boolean isValidWord(String word){
 		word = word.toLowerCase();
@@ -87,8 +106,5 @@ public class PredictivePrototype {
 		return true;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(wordToSignature("home"));
-		
-	}
+
 }

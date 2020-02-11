@@ -1,7 +1,7 @@
 package predictive;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface Dictionary {
-	public Set<String> signatureToWords(String signature);
+	public Collection<String> signatureToWords(String signature);
 }

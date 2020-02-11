@@ -5,8 +5,7 @@ import java.util.Collection;
 
 public class Sigs2WordsProto {
 	public static void main(String[] args) throws IOException {
-		for (String s: args) {
-			
+		for (String s: args) {		
             System.out.print(s + " : ");
             Collection<String> list = PredictivePrototype.signatureToWords(s);
             for(String word:list){
@@ -15,4 +14,5 @@ public class Sigs2WordsProto {
             System.out.println();
         }
 	}
+	
 }
