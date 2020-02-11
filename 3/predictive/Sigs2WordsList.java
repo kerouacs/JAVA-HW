@@ -1,21 +1,13 @@
 package predictive;
-
+/**
+ * The class is to call method of ListDictionary class
+ * It is much faster than PredictivePrototype especially the number is large.The run time is 1103ms.
+ * @author Ruopeng Jiang
+ * @version 2020-2-9
+ */
 public class Sigs2WordsList {
-//	public static void main(String[] args) {
-//		ListDictionary d = new ListDictionary();
-//		for (String s: args) {
-//            System.out.print(s + " : ");
-//            @SuppressWarnings("unchecked")
-//			ArrayList<String> set = (ArrayList<String>) d.signatureToWords(s);
-//            for(String word:set){
-//            	System.out.print(word + " ");
-//            }
-//            System.out.println();
-//        }
-//	}
-
 	    public static void main(String[] args) {
-	        ListDictionary ld = new ListDictionary();
+	        ListDictionary ld = new ListDictionary("/usr/share/dict/words");
 	        for (String s: args)
 	            System.out.println(ld.signatureToWords(s));
 	    }

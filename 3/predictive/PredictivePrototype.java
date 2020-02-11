@@ -6,19 +6,21 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-
+/**
+ * The class is to use the digits 1-9 to simulate the dialing phone numbers.
+ *
+ * @author Ruopeng Jiang
+ * @version 2020-2-8
+ */
 public class PredictivePrototype {
+
 	/**
-	 * Keyboard layout for phone. +----+----+----+ | 1 | 2 | 3 | | |abc |def |
-	 * +----+----+----+ | 4 | 5 | 6 | |ghi |jkl |mno | +----+----+----+ | 7 | 8 | 9
-	 * | |pqrs|tuv |wxyz| +----+----+----+
-	 * 
-	 */
-	/**
-	 * The method takes a word and returns a numeric signature 
 	 * The reason why String Buffer more efficient : 
 	 * Because String invariability causes strings to be created repeatedly during String manipulation
-	 * 
+	 * And StringBuffer can be modified(such as append operation) multiple times without
+     * generating new objects.
+     * 
+	 * The method takes a word and returns a numeric signature 
 	 * @param word A String containing a single word
 	 * @return A string representing the numeric signature of word
 	 */
@@ -44,42 +46,26 @@ public class PredictivePrototype {
 			} else if (c == 'w' || c == 'x' || c == 'y' || c == 'z') {
 				buffer.append('9');
 			} else {
-				return " ";
+				buffer.append(' ');
 			}
 		}
 		return buffer.toString();
 	}
-
+	/**
+	 * This method is inefficient because it has to open the file 'words' and 
+	 * check every word in the file.IO processes are quite slow.
+	 * 
+	 * This method is to the given numeric signature and returns a set of 
+	 * possible matching words from the dictionary.
+     * @param signature The input of the numeric signature.
+     * @return The set of possible matching words from the dictionary.
+	 */
 	public static Set<String> signatureToWords(String signature) throws IOException {
-//		HashSet<String> match = new HashSet<String>();
-//		Scanner scan = null;
-//		try {
-//		    File file = new File("/Users/DELL/Desktop/words");
-//		    scan = new Scanner(new FileReader(file));
-//		    String line = null;
-//		    while (scan.hasNextLine()) {		    	
-//		    	if(line.length()==signature.length() && isValidWord(line)){
-//		    		if(wordToSignature(line).equals(signature)){
-//		    			line = line.toLowerCase();
-//		    			if(!(match.contains(line)))
-//		    				match.add(line);
-//		    		}
-//		    	}
-//		    }
-//
-//		} catch (IOException e) {
-//		    System.out.println("Words file not found.");
-//		} finally {
-//		    scan.close();
-//		}
-//		return match;		
-//	}
         Set<String> res = new HashSet<String>();
         try {
-            Scanner sc = new Scanner(new File("usr/share/dict/words"));
+            Scanner sc = new Scanner(new File("/usr/share/dict/words"));
+            String line = sc.nextLine().toLowerCase();
             while (sc.hasNext()) {
-                String line = sc.nextLine().toLowerCase();
-
                 if (line.length() == signature.length()
                         && isValidWord(line)
                         && signature.equals(wordToSignature(line))) {
@@ -88,12 +74,15 @@ public class PredictivePrototype {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-
             e.printStackTrace();
         }
         return res;
 }
-	
+	/**
+	 * This method returns a boolean indicating that the given string is a valid word
+	 * @param word A string containing a single word.
+	 * @return A boolean indicating whether the word given is valid.
+	 */
 	protected static boolean isValidWord(String word){
 		word = word.toLowerCase();
 		char check;
@@ -105,6 +94,4 @@ public class PredictivePrototype {
 		}
 		return true;
 	}
-
-
 }
