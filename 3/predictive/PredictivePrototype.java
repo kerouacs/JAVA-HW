@@ -63,9 +63,9 @@ public class PredictivePrototype {
 	public static Set<String> signatureToWords(String signature) throws IOException {
         Set<String> res = new HashSet<String>();
         try {
-            Scanner sc = new Scanner(new File("/usr/share/dict/words"));
-            String line = sc.nextLine().toLowerCase();
+            Scanner sc = new Scanner(new File("usr/share/dict/words"));
             while (sc.hasNext()) {
+            	String line = sc.nextLine().toLowerCase();
                 if (line.length() == signature.length()
                         && isValidWord(line)
                         && signature.equals(wordToSignature(line))) {

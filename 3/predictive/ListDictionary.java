@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -102,7 +101,7 @@ public class ListDictionary implements Dictionary{
      * @param signature The input of the numeric signature.
      * @return The set of possible matching words from the dictionary.
 	 */
-	public Collection<String> signatureToWords(String signature) {
+	public Set<String> signatureToWords(String signature) {
 		Set<String> res = new HashSet<>();
         WordSig ws = new WordSig("", signature);
         int index = Collections.binarySearch(dict, ws);
