@@ -94,4 +94,15 @@ public class PredictivePrototype {
 		}
 		return true;
 	}
+	/**
+	 * A method that will take a string (representing a single word)
+	 * and replace all characters that are not an alphabetic character
+	 * with the empty string
+	 * @param word the word to remove non-alphabetic characters from
+	 * @return the same word with all non-alphabetic characters 
+	 * replaced with the empty string
+	 */
+	public static String removeNonAlphabeticCharacters(String word) {
+		return word.replaceAll("[^a-zA-Z]+", "");
+	}
 }

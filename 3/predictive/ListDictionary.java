@@ -63,6 +63,17 @@ public class ListDictionary implements Dictionary{
 		return true;
 	}
 	/**
+	 * A method that will take a string (representing a single word)
+	 * and replace all characters that are not an alphabetic character
+	 * with the empty string
+	 * @param word the word to remove non-alphabetic characters from
+	 * @return the same word with all non-alphabetic characters 
+	 * replaced with the empty string
+	 */
+	public static String removeNonAlphabeticCharacters(String word) {
+		return word.replaceAll("[^a-zA-Z]+", "");
+	}
+	/**
 	 * The method takes a word and returns a numeric signature 
 	 * @param word A String containing a single word
 	 * @return A string representing the numeric signature of word

@@ -1,7 +1,6 @@
 package predictive;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,11 +17,9 @@ public class MapDictionary implements Dictionary {
 		addWords(path);
 	}
 	public Map<String, Set<String>> addWords(String path){
-		map = new HashMap<>();
-		File file =new File(path);
-		BufferedReader reader = null;
-      try {
-          reader = new BufferedReader(new FileReader(file));
+		map = new HashMap<>();		
+      try (BufferedReader reader= new BufferedReader(new FileReader(path))){
+//          reader = new BufferedReader(new FileReader(file));
           String line = null;
           while ((line = reader.readLine()) != null) {              
               if (isValidWord(line)) {
@@ -36,12 +33,12 @@ public class MapDictionary implements Dictionary {
           }
       } catch (IOException e) {
           e.printStackTrace();
-      } finally {
-          try {
-              reader.close();
-          } catch (IOException e) {
-              e.printStackTrace();
-          }
+//      } finally {
+//          try {
+//              reader.close();
+//          } catch (IOException e) {
+//              e.printStackTrace();
+//          }
       }
 		return map;
 	}
