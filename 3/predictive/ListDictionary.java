@@ -1,7 +1,7 @@
 package predictive;
 
 import java.io.BufferedReader;
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ import java.util.Set;
  * @version 2020-2-9
  */
 public class ListDictionary implements Dictionary{
-	private ArrayList<WordSig> dict= new ArrayList<>();;
+	public ArrayList<WordSig> dict= new ArrayList<>();;
 	/**
 	 * This method is a constructor to create new ListDictionary Object. It stores to a
 	 * ArrayList for the words and signatures to be stored as pairs in WordSig.
@@ -23,11 +23,17 @@ public class ListDictionary implements Dictionary{
 	 * @param file path
 	 */
 	public ListDictionary(String path) {
-        File file = new File(path);
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(file));
-            String line = null;
+		addWords(path);
+		Collections.sort(dict);
+    }
+	/**
+	 * This method is use to add words and signature to a new MapDictionary 
+	 * 
+	 * @param file path
+	 */
+	public void addWords(String path) {   
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            String line;
             while ((line = reader.readLine()) != null) {
                 line = line.toLowerCase();
                 if (isValidWord(line)) {
@@ -35,17 +41,12 @@ public class ListDictionary implements Dictionary{
                     dict.add(new WordSig(line, linesignature));
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        Collections.sort(dict);
-    }
+        } catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * This method returns a boolean indicating that the given string is a valid word
 	 * @param word A string containing a single word.
@@ -62,17 +63,7 @@ public class ListDictionary implements Dictionary{
 		}
 		return true;
 	}
-	/**
-	 * A method that will take a string (representing a single word)
-	 * and replace all characters that are not an alphabetic character
-	 * with the empty string
-	 * @param word the word to remove non-alphabetic characters from
-	 * @return the same word with all non-alphabetic characters 
-	 * replaced with the empty string
-	 */
-	public static String removeNonAlphabeticCharacters(String word) {
-		return word.replaceAll("[^a-zA-Z]+", "");
-	}
+
 	/**
 	 * The method takes a word and returns a numeric signature 
 	 * @param word A String containing a single word
@@ -131,5 +122,4 @@ public class ListDictionary implements Dictionary{
         }
         return res;
 	}
-
 }

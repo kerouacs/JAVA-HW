@@ -1,6 +1,7 @@
 package predictive;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,43 +9,66 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-
-
+/**
+ * This class has a dictionary that stores words and signatures in Map.
+ *
+ * @author Ruopeng Jiang
+ * @version 2020-2-12
+ */
 public class MapDictionary implements Dictionary {
-	Map<String, Set<String>> map;
-	
+	private Map<String, Set<String>> dict;
+	/**
+	 * This method is a constructor to create new MapDictionary Object. It stores to a
+	 * map for the words and signatures.
+	 * 
+	 * @param file path
+	 */
 	public MapDictionary(String path) {
 		addWords(path);
 	}
+	/**
+	 * This method is use to add words and signature to a new MapDictionary 
+	 * 
+	 * @param file path
+	 */
 	public Map<String, Set<String>> addWords(String path){
-		map = new HashMap<>();		
+		dict = new HashMap<>();		
       try (BufferedReader reader= new BufferedReader(new FileReader(path))){
 //          reader = new BufferedReader(new FileReader(file));
-          String line = null;
+          String line;
           while ((line = reader.readLine()) != null) {              
               if (isValidWord(line)) {
             	  line = line.toLowerCase();
                   String signature = wordToSignature(line);
-                  if (!map.containsKey(signature)) {
-                      map.put(signature, new HashSet<>());
+                  if (!dict.containsKey(signature)) {
+                	  dict.put(signature, new HashSet<>());
                   }
-                  map.get(signature).add(line);
+                  dict.get(signature).add(line);
               }
           }
-      } catch (IOException e) {
+      } catch (FileNotFoundException e) {
           e.printStackTrace();
+      } catch (IOException e) {
+		 	e.printStackTrace();
+		}
 //      } finally {
 //          try {
 //              reader.close();
 //          } catch (IOException e) {
 //              e.printStackTrace();
 //          }
-      }
-		return map;
+      
+		return dict;
 	}
 	@Override
+	/**
+	 * This method is to the given numeric signature and returns a set of 
+	 * possible matching words from the dictionary.
+     * @param signature The input of the numeric signature.
+     * @return The set of possible matching words from the dictionary.
+	 */
 	public Set<String> signatureToWords(String signature) {
-		return map.getOrDefault(signature, new HashSet<>());
+		return dict.getOrDefault(signature, new HashSet<>());
 	}
 	/**
 	 * This method returns a boolean indicating that the given string is a valid word

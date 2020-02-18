@@ -7,5 +7,8 @@ public class Sigs2WordsMap {
 		for (String s : args) {
 			System.out.println(md.signatureToWords(s));
 		}
+//        for (String key : md.map.keySet()) {
+//            System.out.println( key +  md.map.get(key));
+//        }
 	}
 }

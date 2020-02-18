@@ -180,4 +180,53 @@ class Worksheet3Test {
 		int res=d.compareTo(a);
 		assertEquals(1,res);
 	}
+	//test for MapDictionary.signatureToWords
+	@Test
+	public void test22()  {
+		MapDictionary  test=new MapDictionary("testing.txt");	
+		exp= new  HashSet<String>();
+		res =	(Set<String>) test.signatureToWords("1");
+		assertEquals(exp,res);
+	}
+	@Test	
+	public void test23()  {
+		MapDictionary  test=new MapDictionary("testing.txt");	
+		String[] values = new String[] {"cg","bg","ch","ag","bh","ci","ah","bi","ai"};
+		Set<String> exp= new HashSet<String>(Arrays.asList(values));
+		Set<String> res= new HashSet<String>();		
+		res =	(Set<String>) test.signatureToWords("24");
+		assertEquals(exp,res);
+	}
+	@Test	
+	public void test24()  {
+		MapDictionary  test=new MapDictionary("testing.txt");	
+		exp= new  HashSet<String>();
+		res =	(Set<String>) test.signatureToWords("");
+		assertEquals(exp,res);
+	}
+	//test for TreeDictionary.signatureToWords
+	@Test
+	public void test25()  {
+		TreeDictionary  test=new TreeDictionary("testing.txt");	
+		String[] values = new String[] {"a","b","c"};
+		exp= new HashSet<String>(Arrays.asList(values));
+		res =	(Set<String>) test.signatureToWords("2");
+		assertEquals(exp,res);
+	}
+	@Test	
+	public void test26()  {
+		TreeDictionary  test=new TreeDictionary("testing.txt");	
+		String[] values = new String[] {"cg","bg","ch","ag","bh","ci","ah","bi","ai"};
+		Set<String> exp= new HashSet<String>(Arrays.asList(values));
+		Set<String> res= new HashSet<String>();		
+		res =	(Set<String>) test.signatureToWords("24");
+		assertEquals(exp,res);
+	}
+	@Test	
+	public void test27()  {
+		TreeDictionary  test=new TreeDictionary("testing.txt");		
+		exp= new  HashSet<String>();
+		res =	(Set<String>) test.signatureToWords("");
+		assertEquals(exp,res);
+	}
 }
